@@ -66,6 +66,15 @@ st.markdown("""
         height: 100%;
     }
     .glass-card h3 { color: #ffd700; font-family: 'Orbitron', sans-serif; font-size: 20px; }
+
+    .testimonial-card {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 15px;
+        padding: 20px;
+        border-top: 2px solid #ff8c00;
+        font-style: italic;
+        color: #ddd;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -90,44 +99,25 @@ if st.session_state['page'] == 'Home' and not st.session_state['auth']:
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-    # Sezione Confronto migliorata
+    # Confronto
     st.markdown("<h2 style='text-align:center; font-family:Orbitron; font-size: 24px;'>OTTIENI UN VANTAGGIO STATISTICO</h2>", unsafe_allow_html=True)
     col_a, col_b = st.columns(2, gap="large")
     with col_a:
-        st.markdown("""
-            <div style="padding:25px; border-left: 4px solid #ff4b4b; background: rgba(255,75,75,0.07); border-radius:0 15px 15px 0;">
-                <h4 style="color:#ff4b4b; font-family:Orbitron;">❌ TRADING MANUALE</h4>
-                <p style="color:#ccc; line-height: 1.6;">
-                • Calcolo della size approssimativo o lento.<br>
-                • Esposizione inconsapevole durante i dati macro.<br>
-                • Violazione del drawdown massimo consentito.<br>
-                • Operatività influenzata da ansia e stress.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
+        st.markdown("""<div style="padding:25px; border-left: 4px solid #ff4b4b; background: rgba(255,75,75,0.07); border-radius:0 15px 15px 0;"><h4 style="color:#ff4b4b; font-family:Orbitron;">❌ TRADING MANUALE</h4><p style="color:#ccc;">• Calcolo size lento e impreciso.<br>• Esposizione rischiosa durante le news.<br>• Violazione del drawdown massimo.<br>• Stress decisionale costante.</p></div>""", unsafe_allow_html=True)
     with col_b:
-        st.markdown("""
-            <div style="padding:25px; border-left: 4px solid #00ff00; background: rgba(0,255,0,0.07); border-radius:0 15px 15px 0;">
-                <h4 style="color:#00ff00; font-family:Orbitron;">✅ METODO ZENTRADER</h4>
-                <p style="color:#ccc; line-height: 1.6;">
-                • Algoritmo di calcolo istantaneo della size.<br>
-                • AI Sentinel: blocco operativo durante le news.<br>
-                • Gestione rigida del Drawdown al 2% (Prop Ready).<br>
-                • Analisi oggettiva delle performance post-trade.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
+        st.markdown("""<div style="padding:25px; border-left: 4px solid #00ff00; background: rgba(0,255,0,0.07); border-radius:0 15px 15px 0;"><h4 style="color:#00ff00; font-family:Orbitron;">✅ METODO ZENTRADER</h4><p style="color:#ccc;">• Calcolo istantaneo della size.<br>• Blocco operativo durante i dati macro.<br>• Drawdown rigido al 2% (Prop Ready).<br>• Analisi oggettiva post-sessione.</p></div>""", unsafe_allow_html=True)
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-    # Servizi rifiniti
-    s1, s2, s3 = st.columns(3)
-    with s1: 
-        st.markdown('<div class="glass-card"><h3>🛡️ Prop Shield</h3><p>Proteggi i tuoi conti FTMO o MyFundedFX con il controllo automatico delle perdite giornaliere.</p></div>', unsafe_allow_html=True)
-    with s2: 
-        st.markdown('<div class="glass-card"><h3>⚡ Quantum Calc</h3><p>Calcola il lotto perfetto basandoti sulla volatilità ATR per ottimizzare il rischio/rendimento.</p></div>', unsafe_allow_html=True)
-    with s3: 
-        st.markdown('<div class="glass-card"><h3>🧠 AI Sentinel</h3><p>Analisi predittiva del calendario economico per evitare picchi di volatilità non pianificati.</p></div>', unsafe_allow_html=True)
+    # TESTIMONIANZE
+    st.markdown("<h2 style='text-align:center; font-family:Orbitron; font-size: 24px;'>COSA DICONO I NOSTRI TRADER</h2>", unsafe_allow_html=True)
+    t1, t2, t3 = st.columns(3)
+    with t1:
+        st.markdown("""<div class="testimonial-card">"Finalmente ho superato la mia prima sfida da 100k. Senza il blocco del drawdown avrei bruciato tutto al terzo giorno. ZenTrader è una garanzia."<br><br><b>- Marco R. (Prop Trader)</b></div>""", unsafe_allow_html=True)
+    with t2:
+        st.markdown("""<div class="testimonial-card">"Lo Speed Bridge per il calcolo dei lotti sull'oro è impressionante. Risparmio secondi preziosi che prima mi facevano perdere l'entry migliore."<br><br><b>- Alessandro V. (Scalper)</b></div>""", unsafe_allow_html=True)
+    with t3:
+        st.markdown("""<div class="testimonial-card">"L'AI Sentinel mi ha salvato da tre news ad alto impatto questo mese. Un software che si paga da solo in una singola operazione."<br><br><b>- Elena S. (Swing Trader)</b></div>""", unsafe_allow_html=True)
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)
 
@@ -138,8 +128,8 @@ if st.session_state['page'] == 'Home' and not st.session_state['auth']:
             <div style="background: linear-gradient(145deg, #ffd700, #ff8c00); padding: 40px; border-radius: 30px; text-align: center; color: black; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
                 <h2 style="margin:0; font-family:Orbitron; font-size: 22px;">ELITE ACCESS</h2>
                 <h1 style="font-size: 60px; margin:10px 0;">€49<span style="font-size:20px;">/mese</span></h1>
-                <p style="font-weight:700; margin-bottom: 5px;">STRUMENTI PROFESSIONALI</p>
-                <p style="font-size:13px;">Assicura la tua scalata verso il successo nelle Prop House.</p>
+                <p style="font-weight:700;">STRUMENTI PROFESSIONALI</p>
+                <p style="font-size:13px;">Prendi il controllo della tua carriera nel trading.</p>
             </div>
         """, unsafe_allow_html=True)
 
@@ -154,7 +144,6 @@ elif st.session_state['page'] == 'Login' and not st.session_state['auth']:
         if st.button("ENTRA"):
             if u == "luca" and p == "zen2026":
                 st.session_state['auth'] = True
-                st.session_state['user'] = u
                 st.rerun()
             else: st.error("Credenziali non valide.")
         if st.button("← TORNA ALLA HOME"):
@@ -164,7 +153,6 @@ elif st.session_state['page'] == 'Login' and not st.session_state['auth']:
 
 # --- 5. TERMINALE (VERSIONE COMPLETA) ---
 elif st.session_state['auth']:
-    # [Qui rimane il codice del terminale che abbiamo già settato]
     st.sidebar.markdown("<h1 style='color:#ffd700; font-family:Orbitron;'>ZEN PRO</h1>", unsafe_allow_html=True)
     if st.sidebar.button("LOGOUT"):
         st.session_state['auth'] = False
@@ -172,7 +160,6 @@ elif st.session_state['auth']:
         st.rerun()
     
     st.markdown("<h2 style='font-family:Orbitron;'>DASHBOARD OPERATIVA</h2>", unsafe_allow_html=True)
-    # [Aggiungi qui le colonne del calcolatore e di TradingView come nel codice precedente]
     c_exec, c_chart = st.columns([1, 2.5])
     with c_exec:
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
@@ -185,4 +172,11 @@ elif st.session_state['auth']:
         st.button("ESEGUI")
         st.markdown('</div>', unsafe_allow_html=True)
     with c_chart:
-        st.components.v1.html("""<div style="height:550px; background:#111; border-radius:20px; display:flex; align-items:center; justify-content:center; color:#444;">[Grafico TradingView Attivo]</div>""", height=560)
+        tv_map = {"XAUUSD": "OANDA:XAUUSD", "EURUSD": "FX:EURUSD", "NAS100": "CAPITALCOM:US100", "BTCUSD": "BINANCE:BTCUSDT"}
+        st.components.v1.html(f"""
+            <div id="tv" style="height: 550px;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+            new TradingView.widget({{"width": "100%", "height": 550, "symbol": "{tv_map[asset]}", "interval": "15", "theme": "dark", "style": "1", "locale": "it", "container_id": "tv"}});
+            </script>
+        """, height=560)
