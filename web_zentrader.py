@@ -4,12 +4,12 @@ import sqlite3
 import numpy as np
 from datetime import datetime
 
-# --- 1. CONFIGURAZIONE ESTETICA E DESIGN (CENTRATURA E COLORI ORIGINALI) ---
-st.set_page_config(page_title="ZenTrader AI | Pro Terminal", layout="wide", page_icon="💎")
+# --- 1. CONFIGURAZIONE ESTETICA (DESIGN PREMIUM & CENTRATURA) ---
+st.set_page_config(page_title="ZenTrader AI | Professional Trading Systems", layout="wide", page_icon="💎")
 
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;600;700&display=swap');
     
     .stApp { background-color: #050505; color: #fff; }
 
@@ -20,7 +20,7 @@ st.markdown("""
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 80px 0 20px 0;
+        padding: 60px 0 20px 0;
         width: 100%;
     }
 
@@ -42,6 +42,7 @@ st.markdown("""
         letter-spacing: 3px;
         margin-bottom: 40px;
         text-transform: uppercase;
+        font-weight: 600;
     }
 
     /* Bottoni Centrati e Gradienti */
@@ -58,10 +59,6 @@ st.markdown("""
         box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
         transition: 0.3s;
     }
-    div.stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
-    }
 
     /* Glass Cards */
     .glass-card {
@@ -70,8 +67,9 @@ st.markdown("""
         border-radius: 20px;
         padding: 30px;
         text-align: center;
+        height: 100%;
     }
-    .glass-card h3 { color: #ffd700; }
+    .glass-card h3 { color: #ffd700; font-family: 'Orbitron', sans-serif; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -89,98 +87,114 @@ init_db()
 if 'page' not in st.session_state: st.session_state['page'] = 'Home'
 if 'auth' not in st.session_state: st.session_state['auth'] = False
 
-# --- 4. LANDING PAGE ---
+# --- 4. VISTA: LANDING PAGE PROFESSIONALE ---
 if st.session_state['page'] == 'Home' and not st.session_state['auth']:
     st.markdown("""
         <div class="hero-container">
             <h1 class="main-title">ZENTRADER AI</h1>
-            <p class="sub-title">Domina il rischio. Scala il tuo capitale.</p>
+            <p class="sub-title">L'unico Terminale che protegge il tuo capitale dalla tua emotività.</p>
         </div>
     """, unsafe_allow_html=True)
     
-    c1, c2, c3 = st.columns([1, 0.5, 1])
-    with c2:
-        if st.button("ACCEDI AL TERMINALE"):
+    _, col_btn, _ = st.columns([1, 0.6, 1])
+    with col_btn:
+        if st.button("PROVA IL TERMINALE →"):
             st.session_state['page'] = 'Login'
             st.rerun()
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)
-    f1, f2, f3 = st.columns(3, gap="large")
-    with f1: st.markdown('<div class="glass-card"><h3>🛡️ Protezione 2%</h3><p>Drawdown sotto controllo per ogni Prop Challenge.</p></div>', unsafe_allow_html=True)
-    with f2: st.markdown('<div class="glass-card"><h3>⚡ Speed Bridge</h3><p>Calcolo lotti istantaneo sincronizzato con SL.</p></div>', unsafe_allow_html=True)
-    with f3: st.markdown('<div class="glass-card"><h3>🧠 AI Sentinel</h3><p>Analisi news macroeconomiche real-time.</p></div>', unsafe_allow_html=True)
 
-# --- 5. LOGIN PAGE ---
+    # Confronto Trader Comune vs Zen
+    st.markdown("<h2 style='text-align:center; font-family:Orbitron;'>IL TUO BORDO STATISTICO</h2>", unsafe_allow_html=True)
+    col_a, col_b = st.columns(2, gap="large")
+    with col_a:
+        st.markdown("""
+            <div style="padding:25px; border-left: 4px solid #ff4b4b; background: rgba(255,75,75,0.07); border-radius:0 15px 15px 0;">
+                <h4 style="color:#ff4b4b; font-family:Orbitron;">❌ TRADER COMUNE</h4>
+                <p style="color:#ccc;">• Calcolo lotti manuale e impreciso.<br>• Entra a mercato durante news macro.<br>• Brucia il conto superando il drawdown.<br>• Decide in preda all'ansia o all'avidità.</p>
+            </div>
+        """, unsafe_allow_html=True)
+    with col_b:
+        st.markdown("""
+            <div style="padding:25px; border-left: 4px solid #00ff00; background: rgba(0,255,0,0.07); border-radius:0 15px 15px 0;">
+                <h4 style="color:#00ff00; font-family:Orbitron;">✅ TRADER ZEN</h4>
+                <p style="color:#ccc;">• Esecuzione matematica in 0.4 secondi.<br>• AI Sentinel blocca l'accesso nei dati macro.<br>• Drawdown rigido al 2% (Prop Ready).<br>• Analisi psicologica post-trade inclusa.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
+
+    # Servizi
+    s1, s2, s3 = st.columns(3)
+    with s1: st.markdown('<div class="glass-card"><h3>📊 Prop Shield</h3><p>Protezione automatica del limite giornaliero per FTMO e MyFundedFX.</p></div>', unsafe_allow_html=True)
+    with s2: st.markdown('<div class="glass-card"><h3>🚀 Quantum Calc</h3><p>Calcolo lotti ATR-based per ottimizzare il rischio sulla volatilità reale.</p></div>', unsafe_allow_html=True)
+    with s3: st.markdown('<div class="glass-card"><h3>📜 Audit Report</h3><p>Analisi mensile della tua psicologia operativa in formato PDF.</p></div>', unsafe_allow_html=True)
+
+    st.markdown("<br><br><br>", unsafe_allow_html=True)
+
+    # Pricing
+    _, p_col, _ = st.columns([1, 1, 1])
+    with p_col:
+        st.markdown("""
+            <div style="background: linear-gradient(145deg, #ffd700, #ff8c00); padding: 40px; border-radius: 30px; text-align: center; color: black;">
+                <h2 style="margin:0; font-family:Orbitron;">ELITE PLAN</h2>
+                <h1 style="font-size: 60px; margin:10px 0;">€49<span style="font-size:20px;">/mese</span></h1>
+                <p style="font-weight:bold;">TUTTI I SERVIZI INCLUSI</p>
+                <p style="font-size:12px; margin-top:10px;">Attiva il tuo vantaggio competitivo oggi.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+# --- 5. VISTA: LOGIN ---
 elif st.session_state['page'] == 'Login' and not st.session_state['auth']:
     st.markdown("<br><br><h2 style='text-align:center; font-family:Orbitron;'>SECURITY ACCESS</h2>", unsafe_allow_html=True)
-    _, col_box, _ = st.columns([1, 0.8, 1])
+    _, col_box, _ = st.columns([1, 0.7, 1])
     with col_box:
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-        u = st.text_input("Username")
-        p = st.text_input("Password", type="password")
-        if st.button("VERIFICA"):
+        u = st.text_input("User ID")
+        p = st.text_input("Access Key", type="password")
+        if st.button("VERIFY"):
             if u == "luca" and p == "zen2026":
                 st.session_state['auth'] = True
                 st.session_state['user'] = u
                 st.rerun()
-            else:
-                st.error("Credenziali errate.")
-        if st.button("TORNA ALLA HOME"):
+            else: st.error("Accesso Negato.")
+        if st.button("← BACK"):
             st.session_state['page'] = 'Home'
             st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
 
-# --- 6. TERMINALE OPERATIVO (AUTH) ---
+# --- 6. VISTA: TERMINALE OPERATIVO ---
 elif st.session_state['auth']:
-    st.sidebar.title("💎 ZenTrader Pro")
-    nav = st.sidebar.radio("MENU", ["Terminal", "Storico Trade"])
+    st.sidebar.markdown("<h1 style='color:#ffd700; font-family:Orbitron;'>ZEN PRO</h1>", unsafe_allow_html=True)
+    nav = st.sidebar.radio("SISTEMA", ["Terminal", "Storico"])
     if st.sidebar.button("LOGOUT"):
         st.session_state['auth'] = False
         st.session_state['page'] = 'Home'
         st.rerun()
 
     if nav == "Terminal":
-        # Barra dei prezzi superiore
-        st.markdown("""
-            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; border: 1px solid #333; margin-bottom: 20px;">
-                <p style="margin:0; text-align:center; font-family:Orbitron; font-size: 13px; color: #ffd700;">
-                    LIVE: XAUUSD 2154.20 | EURUSD 1.0942 | BTCUSD 68420.10 | NAS100 18240.55
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-
-        col_calc, col_chart = st.columns([1, 2.5], gap="medium")
-
-        with col_calc:
+        st.markdown("""<div style="background:rgba(255,215,0,0.1); padding:10px; border-radius:10px; text-align:center; border:1px solid #ffd700; margin-bottom:20px; font-family:Orbitron; font-size:12px; color:#ffd700;">LIVE FEED: XAUUSD 2154.20 | EURUSD 1.0942 | BTCUSD 68420.10</div>""", unsafe_allow_html=True)
+        
+        col_exec, col_chart = st.columns([1, 2.5], gap="medium")
+        
+        with col_exec:
             st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-            st.subheader("🛠️ EXECUTION")
             asset = st.selectbox("Asset", ["XAUUSD", "EURUSD", "NAS100", "BTCUSD"])
+            cap = st.number_input("Equity (€)", value=10000)
+            sl = st.number_input("SL (Pips)", value=15)
+            risk = st.slider("Risk %", 0.1, 2.0, 1.0)
             
-            # Mapping simboli per TradingView
-            tv_map = {"XAUUSD": "OANDA:XAUUSD", "EURUSD": "FX:EURUSD", "NAS100": "CAPITALCOM:US100", "BTCUSD": "BINANCE:BTCUSDT"}
-            
-            capitale = st.number_input("Equità (€)", value=10000)
-            sl_pips = st.number_input("Stop Loss (Pips)", value=10)
-            rischio = st.slider("Rischio %", 0.1, 2.0, 1.0)
-            
-            size = round((capitale * (rischio/100)) / (sl_pips * 10), 2)
-            st.markdown(f"<h1 style='color:#ffd700;'>{size}</h1><p style='color:#888;'>LOTTI</p>", unsafe_allow_html=True)
-            
-            if st.button("ESEGUI ORDINE"):
-                st.toast("Ordine inviato!", icon="🚀")
+            size = round((cap * (risk/100)) / (sl * 10), 2)
+            st.markdown(f"<p style='color:#888; font-size:12px;'>LOTTAGGIO CALCOLATO</p><h1 style='color:#ffd700;'>{size}</h1>", unsafe_allow_html=True)
+            if st.button("EXECUTE"): st.toast("Ordine Inviato!", icon="🚀")
             st.markdown('</div>', unsafe_allow_html=True)
 
         with col_chart:
-            # INTEGRATION TRADINGVIEW
+            tv_map = {"XAUUSD": "OANDA:XAUUSD", "EURUSD": "FX:EURUSD", "NAS100": "CAPITALCOM:US100", "BTCUSD": "BINANCE:BTCUSDT"}
             st.components.v1.html(f"""
-                <div id="tv_chart" style="height: 550px;"></div>
+                <div id="tv" style="height: 550px;"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                 <script type="text/javascript">
-                new TradingView.widget({{
-                  "width": "100%", "height": 550, "symbol": "{tv_map[asset]}",
-                  "interval": "15", "timezone": "Europe/Rome", "theme": "dark",
-                  "style": "1", "locale": "it", "enable_publishing": false,
-                  "container_id": "tv_chart"
-                }});
+                new TradingView.widget({{"width": "100%", "height": 550, "symbol": "{tv_map[asset]}", "interval": "15", "theme": "dark", "style": "1", "locale": "it", "container_id": "tv"}});
                 </script>
             """, height=560)
