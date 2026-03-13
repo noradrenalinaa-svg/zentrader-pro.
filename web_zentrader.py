@@ -1,19 +1,20 @@
 import streamlit as st
 
-# --- 1. SETUP MAC-STYLE ---
+# --- 1. CONFIGURAZIONE ---
 st.set_page_config(page_title="ZenTrader Pro", layout="wide")
 
+# --- 2. CSS "THE VAULT" (Apple-Style, No compromise) ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=JetBrains+Mono:wght@100;400&display=swap');
 
-    /* RESET TOTALE E CANCELLAZIONE STILI STREAMLIT */
-    .stApp { background-color: #000 !important; color: #fff; font-family: 'JetBrains Mono', monospace; }
+    /* Reset Streamlit */
+    .stApp { background-color: #000 !important; font-family: 'JetBrains Mono', monospace; }
     header, footer, section[data-testid="stSidebar"], .stDeployButton { display: none !important; }
     .stMainBlockContainer { padding: 0 !important; max-width: 100% !important; }
 
-    /* LAYOUT CENTRALE */
-    .main-wrapper {
+    /* Landing Wrapper */
+    .viewport {
         height: 100vh;
         width: 100vw;
         display: flex;
@@ -22,22 +23,23 @@ st.markdown("""
         align-items: center;
         background: #000;
         padding: 40px;
+        box-sizing: border-box;
     }
 
-    /* BRANDING MINIMALISTA */
+    /* Branding */
     .brand-title {
         font-family: 'Inter', sans-serif;
-        font-size: 100px;
+        font-size: 110px;
         font-weight: 900;
-        letter-spacing: -8px;
+        letter-spacing: -9px;
         line-height: 0.8;
         margin-bottom: 5px;
         text-transform: uppercase;
     }
     .brand-title span { color: #FFD700; }
-    .brand-sub { font-size: 10px; letter-spacing: 8px; color: #333; margin-bottom: 80px; }
+    .brand-sub { font-size: 11px; letter-spacing: 10px; color: #333; margin-bottom: 80px; }
 
-    /* LA TUA GRIGLIA (STILE RAZOR-SHARP) */
+    /* LA TUA GRIGLIA - FORZATA CSS */
     .grid-features {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -45,22 +47,23 @@ st.markdown("""
         max-width: 1200px;
         border-top: 1px solid #111;
         border-bottom: 1px solid #111;
+        background: #000;
     }
 
     .card {
         padding: 60px 40px;
         border-right: 1px solid #111;
         background: transparent;
-        transition: 0.2s;
+        transition: 0.2s ease-in-out;
     }
     .card:last-child { border-right: none; }
     .card:hover { background: #050505; }
 
-    .card-label { color: #FFD700; font-size: 10px; letter-spacing: 3px; margin-bottom: 30px; font-weight: 400; }
-    .card-title { font-size: 18px; font-weight: 400; color: #fff; margin-bottom: 12px; letter-spacing: -1px; }
-    .card-txt { font-size: 13px; color: #444; line-height: 1.6; font-weight: 100; }
+    .card-label { color: #FFD700; font-size: 10px; letter-spacing: 3px; margin-bottom: 25px; font-weight: 400; }
+    .card-title { font-size: 18px; font-weight: 400; color: #fff; margin-bottom: 15px; letter-spacing: -1px; font-family: 'Inter', sans-serif; }
+    .card-txt { font-size: 13px; color: #555; line-height: 1.6; font-weight: 100; }
 
-    /* LOGIN INTEGRATO */
+    /* Form Login Clean */
     .stTextInput input {
         background: transparent !important;
         border: none !important;
@@ -69,7 +72,8 @@ st.markdown("""
         border-radius: 0 !important;
         text-align: center !important;
         font-size: 16px !important;
-        padding: 15px 0 !important;
+        padding: 10px 0 !important;
+        margin-top: 40px;
     }
     .stTextInput input:focus { border-bottom: 1px solid #FFD700 !important; box-shadow: none !important; }
 
@@ -81,22 +85,20 @@ st.markdown("""
         border: none !important;
         height: 45px;
         width: 100%;
-        margin-top: 40px;
-        letter-spacing: 1px;
-        transition: 0.2s;
+        margin-top: 30px;
+        letter-spacing: 2px;
     }
-    .stButton > button:hover { background: #FFD700 !important; }
 </style>
 """, unsafe_allow_html=True)
 
 if 'auth' not in st.session_state: st.session_state['auth'] = False
 
 if not st.session_state['auth']:
-    # --- INTERFACCIA VETRINA ---
-    st.markdown("""
-    <div class="main-wrapper">
+    # --- VETRINA ---
+    st.markdown(f"""
+    <div class="viewport">
         <div class="brand-title">ZEN<span>TRADER</span></div>
-        <div class="brand-sub">PRIVATE TERMINAL 2026</div>
+        <div class="brand-sub">QUANTUM INTERFACE 2026</div>
         
         <div class="grid-features">
             <div class="card">
@@ -117,35 +119,35 @@ if not st.session_state['auth']:
         </div>
     """, unsafe_allow_html=True)
 
-    # LOGIN AREA (PULITA)
-    _, col_log, _ = st.columns([1, 0.4, 1])
-    with col_log:
+    # Login Field
+    _, col, _ = st.columns([1, 0.4, 1])
+    with col:
         with st.form("gate"):
             u = st.text_input("ID", placeholder="IDENTIFICATION", label_visibility="collapsed")
             p = st.text_input("PW", type="password", placeholder="PASSWORD", label_visibility="collapsed")
-            if st.form_submit_button("AUTH"):
+            if st.form_submit_button("SBLOCCA TERMINALE"):
                 if u == "luca" and p == "zen2026":
                     st.session_state.auth = True
                     st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
 else:
-    # --- TERMINALE (ESTETICA RAZOR) ---
-    st.markdown("<div style='padding:40px; border-bottom:1px solid #111;'>", unsafe_allow_html=True)
-    st.markdown("<h3 style='letter-spacing:-2px; margin:0;'>BRIDGE.<span style='color:#FFD700;'>LIVE</span></h3>", unsafe_allow_html=True)
+    # --- TERMINALE (Widest Possible) ---
+    st.markdown("<div style='padding:20px; border-bottom:1px solid #111; display:flex; justify-content:space-between;'>", unsafe_allow_html=True)
+    st.markdown("<span style='color:#FFD700; font-size:10px; letter-spacing:5px;'>TERMINAL // XAUUSD</span>", unsafe_allow_html=True)
+    if st.button("EXIT"):
+        st.session_state.auth = False
+        st.rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
     c1, c2 = st.columns([1, 4])
     with c1:
         st.markdown("<div style='padding:20px;'>", unsafe_allow_html=True)
-        bal = st.number_input("CAPITAL", value=10000)
-        risk = st.slider("RISK %", 0.1, 2.0, 0.5)
-        sl = st.number_input("SL PIPS", value=20)
-        lots = round((bal * (risk/100)) / (sl * 10), 2)
-        st.markdown(f"<div style='border:1px solid #111; padding:30px; margin-top:20px; text-align:center;'><small style='color:#333;'>LOTS</small><h1 style='color:#FFD700;'>{lots}</h1></div>", unsafe_allow_html=True)
-        if st.button("EXIT"): 
-            st.session_state.auth = False
-            st.rerun()
+        bal = st.number_input("Equity", value=10000)
+        risk = st.slider("Risk %", 0.1, 2.0, 0.5)
+        sl = st.number_input("SL Pips", value=20)
+        lotti = round((bal * (risk/100)) / (sl * 10), 2)
+        st.markdown(f"<div style='border:1px solid #111; padding:20px; text-align:center; margin-top:20px;'><h1 style='color:#FFD700;'>{lotti}</h1><small>LOTTI</small></div>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
     with c2:
         st.components.v1.html("""
