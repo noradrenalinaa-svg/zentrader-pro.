@@ -1,20 +1,19 @@
 import streamlit as st
 
-# --- 1. SETUP ---
+# --- 1. CONFIGURAZIONE RADICALE ---
 st.set_page_config(page_title="ZenTrader Pro", layout="wide")
 
-# --- 2. CSS RADICALE (Elimina l'estetica Streamlit) ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;800&display=swap');
 
-    /* Reset totale dell'app */
+    /* KILL STREAMLIT UI */
     .stApp { background-color: #000 !important; color: #fff; font-family: 'JetBrains Mono', monospace; }
     header, footer, section[data-testid="stSidebar"], .stDeployButton { display: none !important; }
     .stMainBlockContainer { padding: 0 !important; max-width: 100% !important; }
 
-    /* LAYOUT DELLA VETRINA */
-    .main-viewport {
+    /* VIEWPORT */
+    .container {
         height: 100vh;
         width: 100vw;
         display: flex;
@@ -22,110 +21,70 @@ st.markdown("""
         justify-content: center;
         align-items: center;
         background: #000;
-        padding: 40px;
+        padding: 60px;
     }
 
-    .brand-header {
-        text-align: center;
-        margin-bottom: 80px;
-    }
+    /* TITOLO BRUTALISTA */
+    .brand { font-size: 120px; font-weight: 800; letter-spacing: -10px; margin-bottom: 5px; text-transform: uppercase; line-height: 0.8; }
+    .brand span { color: #FFD700; }
 
-    .brand-header h1 {
-        font-size: clamp(60px, 8vw, 120px);
-        font-weight: 800;
-        letter-spacing: -6px;
-        line-height: 0.8;
-        margin: 0;
-        text-transform: uppercase;
-    }
-
-    .brand-header span { color: #FFD700; }
-
-    /* GRID FEATURES CUSTOM - PIÙ LARGA E PULITA */
+    /* LA TUA GRIGLIA - STILIZZATA PRO */
     .grid-features {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         width: 100%;
-        max-width: 1400px;
+        max-width: 1200px;
         border: 1px solid #111;
-        background: #000;
+        margin-top: 80px;
     }
 
     .card {
-        padding: 60px 40px;
+        padding: 50px 30px;
         border-right: 1px solid #111;
-        transition: all 0.4s ease;
+        transition: 0.3s ease;
     }
-    
     .card:last-child { border-right: none; }
-    
     .card:hover { background: #050505; border-bottom: 2px solid #FFD700; }
 
-    .card-label { 
-        color: #333; 
-        font-size: 11px; 
-        letter-spacing: 4px; 
-        margin-bottom: 30px; 
-        font-weight: 400;
-    }
+    .card-label { color: #333; font-size: 10px; letter-spacing: 5px; margin-bottom: 30px; }
+    .card-title { font-size: 20px; font-weight: 400; color: #fff; margin-bottom: 15px; letter-spacing: -1px; }
+    .card-txt { font-size: 13px; color: #444; line-height: 1.6; font-weight: 100; }
 
-    .card-title { 
-        font-size: 22px; 
-        font-weight: 400; 
-        color: #fff; 
-        margin-bottom: 15px; 
-        letter-spacing: -1px;
-    }
-
-    .card-txt { 
-        font-size: 14px; 
-        color: #555; 
-        line-height: 1.7; 
-        font-weight: 100;
-    }
-
-    /* LOGIN MINIMALE IN FONDO */
-    .login-box {
-        margin-top: 60px;
-        width: 100%;
-        max-width: 350px;
-    }
-
-    /* Override input e bottoni per eliminare lo stile "giocattolo" */
-    input {
+    /* INPUT LOGIN - ULTRA CLEAN */
+    .stTextInput input {
         background: transparent !important;
         border: none !important;
         border-bottom: 1px solid #222 !important;
         color: #FFD700 !important;
         border-radius: 0 !important;
-        padding: 15px 0 !important;
         text-align: center !important;
+        font-size: 18px !important;
+        transition: 0.3s;
     }
-    
+    .stTextInput input:focus { border-bottom: 1px solid #FFD700 !important; }
+
     .stButton > button {
         background: #FFD700 !important;
         color: #000 !important;
         border-radius: 0 !important;
         font-weight: 800 !important;
-        letter-spacing: 2px;
         border: none !important;
         height: 50px;
-        margin-top: 30px;
+        width: 100%;
+        margin-top: 40px;
+        letter-spacing: 2px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# --- 3. LOGICA DI STATO ---
 if 'auth' not in st.session_state: st.session_state['auth'] = False
 
 if not st.session_state['auth']:
-    # --- VETRINA ---
+    # --- INTERFACCIA VETRINA ---
     st.markdown("""
-    <div class="main-viewport">
-        <div class="brand-header">
-            <h1>ZEN<span>TRADER</span></h1>
-            <p style="letter-spacing: 8px; color: #222; font-size: 12px; margin-top: 10px;">QUANTUM RISK ARCHITECTURE</p>
-        </div>
+    <div class="container">
+        <div class="brand">ZEN<span>TRADER</span></div>
+        <p style="color:#222; letter-spacing:10px; font-size:11px;">QUANTUM RISK ARCHITECTURE</p>
         
         <div class="grid-features">
             <div class="card">
@@ -147,9 +106,9 @@ if not st.session_state['auth']:
     """, unsafe_allow_html=True)
 
     # LOGIN FORM
-    _, col_center, _ = st.columns([1, 0.4, 1])
-    with col_center:
-        with st.form("gate"):
+    _, col_form, _ = st.columns([1, 0.5, 1])
+    with col_form:
+        with st.form("access_gate"):
             u = st.text_input("ID", placeholder="IDENTIFICATION", label_visibility="collapsed")
             p = st.text_input("PW", type="password", placeholder="PASSWORD", label_visibility="collapsed")
             if st.form_submit_button("SBLOCCA TERMINALE"):
@@ -161,27 +120,28 @@ if not st.session_state['auth']:
     st.markdown('</div>', unsafe_allow_html=True)
 
 else:
-    # --- TERMINALE (Dopo il Login) ---
-    st.markdown("<div style='padding:40px;'>", unsafe_allow_html=True)
-    st.markdown("<h3 style='letter-spacing:-1px;'>TERMINALE <span style='color:#FFD700;'>LIVE</span></h3>", unsafe_allow_html=True)
-    
+    # --- TERMINALE LIVE ---
+    st.markdown("<div style='padding:40px; display:flex; justify-content:space-between; align-items:center;'>", unsafe_allow_html=True)
+    st.markdown("<h2 style='letter-spacing:-2px;'>TERMINAL <span style='color:#FFD700;'>LIVE</span></h2>", unsafe_allow_html=True)
+    if st.button("LOGOUT"):
+        st.session_state.auth = False
+        st.rerun()
+    st.markdown("</div>", unsafe_allow_html=True)
+
     c1, c2 = st.columns([1, 4])
     with c1:
-        st.markdown("---")
+        st.markdown("<div style='padding:20px; border:1px solid #111;'>", unsafe_allow_html=True)
         bal = st.number_input("Equity", value=10000)
         risk = st.slider("Risk %", 0.1, 2.0, 0.5)
         sl = st.number_input("SL Pips", value=20)
         lotti = round((bal * (risk/100)) / (sl * 10), 2)
-        st.markdown(f"<div style='border:1px solid #222; padding:20px; text-align:center;'><h1>{lotti}</h1><small>LOTTI</small></div>", unsafe_allow_html=True)
-        if st.button("LOGOUT"):
-            st.session_state.auth = False
-            st.rerun()
+        st.markdown(f"<p style='color:#444; font-size:10px; margin-top:20px;'>LOTS</p><h1 style='color:#FFD700; margin:0;'>{lotti}</h1>", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
     with c2:
         st.components.v1.html("""
-            <div style="height:700px; border:1px solid #111;">
+            <div style="height:750px; border:1px solid #111;">
                 <div id="tv"></div>
             </div>
             <script src="https://s3.tradingview.com/tv.js"></script>
-            <script>new TradingView.widget({"width": "100%", "height": 700, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv"});</script>
-        """, height=700)
-    st.markdown("</div>", unsafe_allow_html=True)
+            <script>new TradingView.widget({"width": "100%", "height": 750, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv"});</script>
+        """, height=750)
