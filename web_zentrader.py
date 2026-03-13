@@ -64,7 +64,6 @@ st.markdown("""
         text-align: center;
         height: 100%;
     }
-    .glass-card h3 { color: #ffd700; font-family: 'Orbitron', sans-serif; font-size: 20px; }
 
     .testimonial-card {
         background: rgba(255, 255, 255, 0.02);
@@ -76,7 +75,7 @@ st.markdown("""
         height: 100%;
     }
 
-    /* Bottoni di Acquisto Corretti */
+    /* Bottoni di Acquisto - Forza il colore del testo a bianco */
     .pay-button {
         background-color: #000000 !important;
         color: #ffffff !important;
@@ -84,13 +83,14 @@ st.markdown("""
         border-radius: 10px;
         font-family: 'Orbitron', sans-serif;
         font-weight: 700;
-        text-decoration: none;
+        text-decoration: none !important;
         display: block;
         margin: 20px auto 10px auto;
         width: 80%;
         text-align: center;
         border: 1px solid #444;
     }
+    
     .contact-button {
         background-color: transparent;
         color: #000000 !important;
@@ -98,7 +98,7 @@ st.markdown("""
         border-radius: 10px;
         font-family: 'Inter', sans-serif;
         font-weight: 600;
-        text-decoration: none;
+        text-decoration: none !important;
         display: block;
         margin: 5px auto;
         width: 80%;
@@ -152,11 +152,11 @@ if st.session_state['page'] == 'Home' and not st.session_state['auth']:
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-    # Prezzo e Pagamenti (CORRETTO)
+    # Prezzo e Pagamenti
     st.markdown("<h2 style='text-align:center; font-family:Orbitron; font-size: 24px;'>PIANI DI ACCESSO</h2>", unsafe_allow_html=True)
     _, p_col, _ = st.columns([1, 1, 1])
     with p_col:
-        st.markdown(f"""
+        st.markdown("""
             <div style="background: linear-gradient(145deg, #ffd700, #ff8c00); padding: 40px; border-radius: 30px; text-align: center; color: black; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
                 <h2 style="margin:0; font-family:Orbitron; font-size: 22px;">ELITE ACCESS</h2>
                 <h1 style="font-size: 60px; margin:10px 0;">€49<span style="font-size:20px;">/mese</span></h1>
