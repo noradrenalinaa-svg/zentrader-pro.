@@ -9,7 +9,7 @@ st.markdown("""
 <script defer src="https://cloud.umami.is/script.js" data-website-id="48c34484-b01f-4c2d-b606-40f648561dbc"></script>
 """, unsafe_allow_html=True)
 
-# --- 3. CSS PREMIUM COMPLETO ---
+# --- 3. CSS PREMIUM AVANZATO ---
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;700&display=swap');
@@ -23,30 +23,48 @@ st.markdown("""
         background: linear-gradient(90deg, #ffd700, #ff8c00); 
         -webkit-background-clip: text; 
         -webkit-text-fill-color: transparent; 
-        margin-bottom: 0px;
+        margin-bottom: 10px;
+    }
+
+    /* NUOVA GRAFICA PORTALE ACCESSO */
+    .login-container {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 25px;
+        padding: 40px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .login-header {
+        font-family: 'Orbitron';
+        color: #ffd700;
+        font-size: 18px;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        display: block;
     }
 
     .section-title { 
         font-family: 'Orbitron'; 
         color: #ffd700; 
         text-align: center; 
-        margin-top: 70px; 
+        margin-top: 80px; 
         text-transform: uppercase; 
         letter-spacing: 3px;
-        font-size: 24px;
+        font-size: 22px;
     }
 
-    /* Card Recensioni */
+    /* Recensioni */
     .review-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 215, 0, 0.1);
-        padding: 25px;
-        border-radius: 20px;
-        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.02);
+        border-left: 3px solid #ffd700;
+        padding: 20px;
+        border-radius: 0 15px 15px 0;
         height: 100%;
     }
-    .review-text { font-family: 'Inter'; font-style: italic; color: #ccc; font-size: 14px; }
-    .review-author { font-family: 'Orbitron'; color: #ffd700; font-size: 12px; margin-top: 15px; display: block; }
 
     /* Card Prezzi */
     .price-card { 
@@ -55,7 +73,7 @@ st.markdown("""
         border-radius: 40px; 
         text-align: center; 
         color: black; 
-        box-shadow: 0 20px 50px rgba(255,215,0,0.15);
+        box-shadow: 0 20px 50px rgba(255,215,0,0.2);
     }
 
     .pay-btn { 
@@ -71,6 +89,14 @@ st.markdown("""
         width: fit-content;
         transition: 0.4s ease;
     }
+    
+    /* Input Fields Styling */
+    .stTextInput input {
+        background-color: rgba(255,255,255,0.05) !important;
+        color: white !important;
+        border: 1px solid rgba(255,215,0,0.2) !important;
+        border-radius: 10px !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -80,69 +106,66 @@ if 'auth' not in st.session_state: st.session_state['auth'] = False
 # --- 5. HOME PAGE ---
 if not st.session_state['auth']:
     st.markdown('<h1 class="main-title">ZENTRADER AI</h1>', unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:#666; letter-spacing: 5px; font-family:Inter; font-size:14px;'>ELIMINATE EMOTIONS. MAXIMIZE DISCIPLINE.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:#666; letter-spacing: 5px; font-family:Inter; font-size:14px; margin-bottom:40px;'>ELIMINATE EMOTIONS. MAXIMIZE DISCIPLINE.</p>", unsafe_allow_html=True)
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
-
-    # LOGIN AREA
-    _, col_login, _ = st.columns([1, 0.8, 1])
+    # NUOVO PORTALE ACCESSO GRAFICO
+    _, col_login, _ = st.columns([1, 1.2, 1])
     with col_login:
-        with st.expander("🔑 PORTALE ACCESSO CLIENTI"):
-            u = st.text_input("User ID")
-            p = st.text_input("Access Key", type="password")
-            if st.button("SBLOCCA SOFTWARE"):
-                if u == "luca" and p == "zen2026":
+        st.markdown('<div class="login-container">', unsafe_allow_html=True)
+        st.markdown('<span class="login-header">🔐 SECURITY CHECK</span>', unsafe_allow_html=True)
+        u = st.text_input("USER ID", placeholder="Username", label_visibility="collapsed")
+        p = st.text_input("ACCESS KEY", type="password", placeholder="Password", label_visibility="collapsed")
+        if st.button("UNLOCK TERMINAL", use_container_width=True):
+            if u == "luca" and p == "zen2026":
+                with st.spinner('Accessing encrypted core...'):
+                    time.sleep(1.5)
                     st.session_state['auth'] = True
                     st.rerun()
-                else: st.error("Credenziali non valide.")
+            else:
+                st.error("Invalid Credentials")
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # SEZIONE RECENSIONI
-    st.markdown('<h2 class="section-title">Cosa dicono i Trader</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">Trader Experiences</h2>', unsafe_allow_html=True)
     rev1, rev2, rev3 = st.columns(3)
     with rev1:
-        st.markdown('<div class="review-card"><span class="review-text">"Finalmente un calcolatore serio. Da quando uso ZenTrader non ho più sforato il rischio su FTMO. Il blocco del drawdown è un salvavita."</span><span class="review-author">- Marco T. (Prop Trader)</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="review-card"><p style="font-style:italic; color:#bbb;">"Il blocco del drawdown al 2% è la funzione che mi ha permesso di passare la mia prima Prop."</p><b style="color:#ffd700; font-family:Orbitron; font-size:10px;">MARCO T.</b></div>', unsafe_allow_html=True)
     with rev2:
-        st.markdown('<div class="review-card"><span class="review-text">"Interfaccia pulitissima sul mio Mac. In 2 secondi so quanto aprire di size sull\'oro. Vale ogni centesimo dell\'abbonamento."</span><span class="review-author">- Andrea L.</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="review-card"><p style="font-style:italic; color:#bbb;">"Rapido, pulito e matematico. Sul Mac gira che è una meraviglia."</p><b style="color:#ffd700; font-family:Orbitron; font-size:10px;">ANDREA L.</b></div>', unsafe_allow_html=True)
     with rev3:
-        st.markdown('<div class="review-card"><span class="review-text">"L\'AI Sentinel mi ha salvato da tre news ad alto impatto questo mese. Indispensabile per chi cerca costanza."</span><span class="review-author">- Giulia R.</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="review-card"><p style="font-style:italic; color:#bbb;">"Niente più calcoli manuali mentre il prezzo scappa. Indispensabile."</p><b style="color:#ffd700; font-family:Orbitron; font-size:10px;">GIULIA R.</b></div>', unsafe_allow_html=True)
 
     # SEZIONE PREZZI
-    st.markdown('<h2 class="section-title">Membership Elite</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">Elite Membership</h2>', unsafe_allow_html=True)
     _, p_col, _ = st.columns([1, 1, 1])
     with p_col:
         st.markdown("""
 <div class="price-card">
     <h1 style="font-size: 65px; margin:10px 0; font-family:Orbitron;">€49<span style="font-size:20px;">/mese</span></h1>
-    <p style="background: rgba(0,0,0,0.1); display:inline-block; padding:5px 15px; border-radius:20px; font-size:11px; font-weight:bold;">ABBONAMENTO MENSILE RICORRENTE</p>
-    <ul style="list-style:none; padding:30px 0; text-align:left; font-size:15px; font-family:Inter;">
-        <li>✅ Calcolo Size Anti-Emotività</li>
-        <li>✅ Protezione Drawdown 2%</li>
-        <li>✅ AI News Sentinel (Real-time)</li>
-        <li>✅ Accesso Terminale Web Pro</li>
+    <p style="font-size:11px; font-weight:bold; letter-spacing:1px; color:rgba(0,0,0,0.6);">RICORRENTE - CANCEL ANYTIME</p>
+    <ul style="list-style:none; padding:20px 0; text-align:left; font-size:14px; font-family:Inter;">
+        <li>✅ Pro Shield Drawdown (2%)</li>
+        <li>✅ Instant Size Calculator</li>
+        <li>✅ AI News Sentinel Filter</li>
+        <li>✅ No Installation Required</li>
     </ul>
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=noradrenalinaa@gmail.com&item_name=ZenTrader%20AI%20Elite%20Monthly&amount=49.00&currency_code=EUR" target="_self" class="pay-btn">ATTIVA ABBONAMENTO</a>
-    <p style="font-size: 10px; color: black; opacity: 0.7;">Disdici in qualsiasi momento via PayPal</p>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=noradrenalinaa@gmail.com&item_name=ZenTrader%20AI%20Elite%20Monthly&amount=49.00&currency_code=EUR" target="_self" class="pay-btn">START NOW</a>
+    <a href="https://t.me/ZenTraderIA" target="_self" style="color:black; text-decoration:none; font-size:12px; font-weight:bold; opacity:0.5;">Supporto Telegram →</a>
 </div>
 """, unsafe_allow_html=True)
 
-    # SEZIONE FAQ (RIPRISTINATA COMPLETA)
-    st.markdown('<h2 class="section-title">Domande Frequenti</h2>', unsafe_allow_html=True)
-    _, faq_col, _ = st.columns([0.1, 1, 0.1])
+    # FAQ
+    st.markdown('<h2 class="section-title">F.A.Q.</h2>', unsafe_allow_html=True)
+    _, faq_col, _ = st.columns([0.2, 1, 0.2])
     with faq_col:
-        with st.expander("L'abbonamento si rinnova da solo?"):
-            st.write("Sì, per garantirti l'accesso ininterrotto, l'abbonamento si rinnova automaticamente ogni 30 giorni. Puoi annullarlo quando vuoi con un clic dal tuo conto PayPal.")
-        with st.expander("Posso usarlo per le Prop Challenge?"):
-            st.write("Certamente. Il sistema è ottimizzato per chi deve rispettare regole rigide di gestione del rischio (come il drawdown giornaliero).")
-        with st.expander("Quali asset posso calcolare?"):
-            st.write("Oro (XAUUSD), le principali coppie Forex (EURUSD, GBPUSD, ecc.), Indici (NAS100, US30) e le principali Crypto.")
-        with st.expander("Devo installare software sul Mac?"):
-            st.write("No, ZenTrader AI è un terminale cloud. Ti basta il browser del tuo MacBook per essere operativo ovunque.")
-        with st.expander("È sicuro il pagamento?"):
-            st.write("Usiamo PayPal, il sistema più sicuro al mondo. I tuoi dati finanziari non passano mai dai nostri server.")
-        with st.expander("Cosa ricevo dopo il pagamento?"):
-            st.write("Riceverai immediatamente via email le tue credenziali (User ID e Access Key) per sbloccare il terminale su questo sito.")
+        with st.expander("Come funziona l'abbonamento?"):
+            st.write("Pagamento mensile automatico via PayPal. Puoi disdire con un clic dal tuo account in ogni momento.")
+        with st.expander("Quali asset supporta?"):
+            st.write("Oro, Forex, Indici e Crypto. Tutto ciò che serve a un trader moderno.")
+        with st.expander("Sicurezza dati?"):
+            st.write("I tuoi dati di pagamento sono gestiti interamente da PayPal. Noi non memorizziamo mai le tue carte.")
 
-    st.markdown("<br><br><p style='text-align:center; color:#333; font-size: 11px;'>© 2026 ZenTrader AI System. Licenza mensile ricorrente.</p>", unsafe_allow_html=True)
+    st.markdown("<br><br><p style='text-align:center; color:#222; font-size: 10px;'>ZenTrader AI System 2026. Secure Algorithm Trading.</p>", unsafe_allow_html=True)
 
 # --- 6. TERMINALE OPERATIVO ---
 else:
@@ -150,4 +173,4 @@ else:
     if st.sidebar.button("LOGOUT"):
         st.session_state['auth'] = False
         st.rerun()
-    st.info("Accesso Eseguito. Buona sessione, Luca.")
+    st.info("System Online. Protection Active.")
