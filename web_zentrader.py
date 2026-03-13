@@ -76,24 +76,37 @@ st.markdown("""
         height: 100%;
     }
 
-    .buy-button {
-        background-color: #000;
+    /* Bottoni di Acquisto */
+    .pay-button {
+        background-color: #0070ba; /* PayPal Blue */
         color: #fff !important;
-        padding: 18px;
-        border-radius: 12px;
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 900;
+        padding: 15px;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
         text-decoration: none;
         display: block;
-        margin-top: 20px;
-        transition: 0.3s;
-        border: 1px solid #000;
+        margin-top: 15px;
         text-align: center;
+        transition: 0.3s;
     }
-    .buy-button:hover {
-        background-color: #222;
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    .contact-button {
+        background-color: transparent;
+        color: #000 !important;
+        padding: 12px;
+        border-radius: 10px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        border: 1px solid rgba(0,0,0,0.2);
+        font-size: 14px;
+    }
+    .pay-button:hover, .contact-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     </style>
     """, unsafe_allow_html=True)
@@ -141,22 +154,28 @@ if st.session_state['page'] == 'Home' and not st.session_state['auth']:
 
     st.markdown("<br><br><br>", unsafe_allow_html=True)
 
-    # Prezzo e Telegram
+    # Prezzo e Pagamenti
     st.markdown("<h2 style='text-align:center; font-family:Orbitron; font-size: 24px;'>PIANI DI ACCESSO</h2>", unsafe_allow_html=True)
     _, p_col, _ = st.columns([1, 1, 1])
     with p_col:
+        # Link PayPal personalizzato con la tua email
+        link_paypal = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=noradrenalinaa@gmail.com&item_name=ZenTrader%20AI%20Elite%20Access&amount=49.00&currency_code=EUR"
+        
         st.markdown(f"""
             <div style="background: linear-gradient(145deg, #ffd700, #ff8c00); padding: 40px; border-radius: 30px; text-align: center; color: black; box-shadow: 0 10px 30px rgba(255,215,0,0.2);">
                 <h2 style="margin:0; font-family:Orbitron; font-size: 22px;">ELITE ACCESS</h2>
                 <h1 style="font-size: 60px; margin:10px 0;">€49<span style="font-size:20px;">/mese</span></h1>
                 <p style="font-weight:700;">ACCESSO COMPLETO AL TERMINALE</p>
-                <ul style="list-style:none; padding:0; text-align:left; font-size:14px; margin: 20px 0;">
-                    <li>✔️ Calcolatore Size Avanzato</li>
-                    <li>✔️ AI News Sentinel (Real-time)</li>
-                    <li>✔️ Protezione Drawdown 2%</li>
+                <ul style="list-style:none; padding:0; text-align:left; font-size:14px; margin: 15px 0;">
+                    <li>✔️ Calcolatore Size (Forex/Gold/Indici)</li>
+                    <li>✔️ AI News Sentinel & Prop Shield</li>
+                    <li>✔️ Gestione Drawdown 2%</li>
                 </ul>
-                <a href="https://t.me/ZenTraderIA" target="_blank" class="buy-button">CONTATTA IL TEAM →</a>
-                <p style="font-size:12px; margin-top:15px; font-weight: bold;">💎 Garanzia: Soddisfatti o Rimborsati 100%</p>
+                
+                <a href="{link_paypal}" target="_blank" class="pay-button">PAGA CON PAYPAL →</a>
+                <a href="https://t.me/ZenTraderIA" target="_blank" class="contact-button">Supporto Telegram</a>
+                
+                <p style="font-size:11px; margin-top:15px; font-weight: bold;">🔒 Pagamento sicuro e garantito</p>
             </div>
         """, unsafe_allow_html=True)
 
